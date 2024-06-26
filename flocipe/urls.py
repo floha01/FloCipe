@@ -21,6 +21,6 @@ from app.views import index, search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', index),
+    path('index/', index, name='index'),
     path('search/', search, name='search')
 ]
