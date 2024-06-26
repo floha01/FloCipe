@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 
@@ -9,7 +11,10 @@ def search_recipe(query):
     response = requests.get(endpoint)
     if response.status_code == 200:
         data = response.json()
+        print(data)
         recipes = data.get('hits', [])
+        with open('recipes.json', 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
         return recipes
     else:
         return None

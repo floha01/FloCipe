@@ -10,5 +10,5 @@ def index(request):
 def search(request):
     query = request.GET.get('query', '')
     recipes = search_recipe(query)
-    return render(request, 'search_results.html', {'recipes': recipes, 'query': query})
+    return render(request, 'search.html', {'recipes': recipes, 'query': query})
 
