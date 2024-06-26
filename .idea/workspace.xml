@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="898211ca-27fd-4b36-aab3-058d20075b05" name="Changes" comment="Added animation, and linked HTML to the django code">
+    <list default="true" id="898211ca-27fd-4b36-aab3-058d20075b05" name="Changes" comment="Changed card design">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/search.html" afterDir="false" />
     </list>
@@ -106,7 +106,7 @@
       <option name="presentableId" value="Default" />
       <updated>1719392910181</updated>
       <workItem from="1719392912644" duration="4709000" />
-      <workItem from="1719397634789" duration="8707000" />
+      <workItem from="1719397634789" duration="8921000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -180,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719424590073</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Changed card design">
+      <option name="closed" value="true" />
+      <created>1719426952211</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1719426952211</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +215,7 @@
     <MESSAGE value="exported data to analyze it further in json" />
     <MESSAGE value="added gitignore" />
     <MESSAGE value="Added animation, and linked HTML to the django code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added animation, and linked HTML to the django code" />
+    <MESSAGE value="Changed card design" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed card design" />
   </component>
 </project>
