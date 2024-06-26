@@ -6,37 +6,172 @@
     <title>Recipe Search Results</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .recipe-list {
-            display: flex;
-            flex-wrap: wrap;
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .recipe-list li {
-            flex: 1 0 21%; /* Adjust the percentage to fit your needs */
-            margin: 1%;
-            box-sizing: border-box;
-        }
-        /* Anpassungen für Animation */
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(50px); /* Startposition: Karte beginnt außerhalb des Sichtfelds */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0); /* Endposition: Karte bewegt sich in die Standardposition */
-            }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-        .card {
-            animation: slideIn 0.5s ease; /* Animation mit 0.5 Sekunden Dauer und einfacher Easing-Funktion */
-        }
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif
+}
+
+body {
+    margin-top: 30px;
+    background-color:#eee;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+p {
+    margin: 0px
+}
+
+.card {
+    width: 280px;
+    height: 520px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: #fff;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    overflow: hidden
+}
+
+.card .backgroundEffect {
+    bottom: 0;
+    height: 0px;
+    width: 100%
+}
+
+.card:hover {
+    color: #fff;
+    transform: scale(1.025);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px
+}
+
+.card:hover .backgroundEffect {
+    bottom: 0;
+    height: 320px;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    background: #1b9ce3;
+    animation: popBackground 0.3s ease-in
+}
+
+@keyframes popBackground {
+    0% {
+        height: 20px;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%
+    }
+
+    50% {
+        height: 80px;
+        border-top-left-radius: 75%;
+        border-top-right-radius: 75%
+    }
+
+    75% {
+        height: 160px;
+        border-top-left-radius: 85%;
+        border-top-right-radius: 85%
+    }
+
+    100% {
+        height: 320px;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%
+    }
+}
+
+.card .pic {
+    position: relative
+}
+
+.card .pic img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover
+}
+
+.card .date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 70px;
+    background-color: #1b9ce3;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+    transition: all ease
+}
+
+.card .date .day {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.card .date .month,
+.card .date .year {
+    font-size: 10px
+}
+
+.card .text-muted {
+    font-size: 12px
+}
+
+.card:hover .text-muted {
+    color: #fff !important
+}
+
+.card .content {
+    padding: 0 20px
+}
+
+.card .content .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: #1b9ce3;
+    border-radius: 25px;
+    font-size: 12px;
+    border: none
+}
+
+.card:hover .content .btn {
+    background: #fff;
+    color: #1b9ce3;
+    box-shadow: #0000001a 0px 3px 5px
+}
+
+.card .content .btn .fas {
+    font-size: 10px;
+    padding-left: 5px
+}
+
+.card .content .foot .admin {
+    color: #1b9ce3;
+    font-size: 12px
+}
+
+.card:hover .content .foot .admin {
+    color: #fff
+}
+
+.card .content .foot .icon {
+    font-size: 12px
+}
     </style>
 </head>
 <body>
@@ -47,35 +182,47 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
 </nav>
-    <div class="container mt-4">
-        <h1>Search Results for "{{ query }}"</h1>
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="recipe-list">
-                    {% if recipes %}
-                        {% for recipe in recipes %}
-                            <li>
-                                <div class="card mb-4">
-                                    <img class="card-img-top" src="{{ recipe.recipe.image }}" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ recipe.recipe.label }}</h5>
-                                        <p class="card-text">
-                                            {% for ingredient in recipe.recipe.ingredientLines %}
-                                                <span>{{ ingredient }}</span><br>
-                                            {% endfor %}
-                                        </p>
-                                        <a href="{{ recipe.recipe.url }}" class="btn btn-primary">Direct link</a>
-                                    </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    {% else %}
-                        <li>No results found.</li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+ <h1>Search results for {{ query }}</h1>
+   <div class="container">
+    <h1>Search results for "{{ query }}"</h1>
+    <div class="d-lg-flex">
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="card border-0 me-lg-4 mb-lg-0 mb-4 position-relative">
+                    <div class="backgroundEffect"></div>
+                    <div class="pic">
+                        <img class="card-img-top" src="{{ recipe.recipe.image }}" alt="{{ recipe.recipe.label }}">
+                        <div class="date">
+                            <span class="day">26</span>
+                            <span class="month">June</span>
+                            <span class="year">2019</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title h-1 mt-4">{{ recipe.recipe.label }}</h5>
+                        <p class="card-text text-muted mt-3">
+                            {% if recipe.recipe.ingredientLines %}
+                                {% for ingredient in recipe.recipe.ingredientLines %}
+                                    {{ ingredient }}<br>
+                                {% endfor %}
+                            {% endif %}
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-3 pb-3">
+                            <a href="{{ recipe.recipe.uri }}" class="btn btn-primary">View Recipe<span class="fas fa-arrow-right ms-2"></span></a>
+                            <div class="d-flex align-items-center justify-content-center foot">
+                                <p class="admin">Admin</p>
+                                <p class="ps-3 icon text-muted"><span class="fas fa-comment-alt pe-1"></span>3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
     </div>
+</div>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
